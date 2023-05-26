@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--指定项目的父级依赖为Spring Boot Starter Parent-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.0.RELEASE</version>
+        <relativePath/>
+        <!--relativePath节点为空，表示Maven会从Maven仓库中查找父级依赖-->
+    </parent>
+
+    <groupId>org.example</groupId>  <!--项目所属的组织或公司，通常使用反转的域名-->
+    <artifactId>CommunityMaven</artifactId> <!--项目的唯一标识符，通常是项目的名称-->
+    <version>1.0-SNAPSHOT</version> <!--项目的版本号，通常使用三位数字-->
+    <name>CommunityMaven</name> <!--表示项目的名称，可以和artifactId相同，也可以不同-->
+    <description>社区物业管理系统</description> <!--项目的简要描述，通常用于说明项目的功能或用途-->
+
+    <properties>
+        <java.version>1.8</java.version>    <!--指定项目使用的Java版本号为1.8-->
+    </properties>
+
+    <dependencies>
+        <!--一个常用的Java工具库，包含了大量的字符串、日期、数字等处理工具类-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.10</version>
+        </dependency>
+
+        <!--Spring Boot框架提供的Thymeleaf模板引擎的依赖库，用于生成HTML等模板文件-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!--Spring Boot框架提供的Web应用程序的依赖库，包含了常用的Web组件和功能-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--spring-boot-devtools可以帮助开发者提高开发效率，它提供了许多有用的工具和功能。
+        在开发阶段，可以使用该依赖关系自动重启应用程序，减少手动重启的时间。
+        同时，它还可以实现热部署，使得修改代码后可以立即生效，无需手动重新编译和部署-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <!--依赖范围，指定了依赖关系在什么环境下可用。
+            这里的runtime表示只在运行时可用，而不在编译时和测试时可用-->
+            <scope>runtime</scope>
+            <!--可选依赖，表示该依赖关系不是必须的，如果没有找到该依赖关系，也不会导致构建失败-->
+            <optional>true</optional>
+        </dependency>
+
+        <!--在Java应用程序中使用MySQL数据库，它提供了Java连接MySQL数据库的必要组件和功能-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <!--依赖范围，指定了依赖关系在什么环境下可用。这里的runtime表示只在运行时可用，而不在编译时和测试时可用-->
+            <scope>runtime</scope>
+        </dependency>
+
+        <!--在Java应用程序中使用Lombok库，减少Java代码的编写量和重复代码，提高开发效率-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <!--可选依赖，表示该依赖关系不是必须的，如果没有找到该依赖关系，也不会导致构建失败-->
+            <optional>true</optional>
+        </dependency>
+
+        <!--在Spring Boot应用程序的测试中使用Spring Boot提供的测试框架，并提供了必要的组件和功能，如Junit测试框架、Mockito框架等-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <!--只在测试时可用，而不在编译或运行时可用-->
+            <scope>test</scope>
+        </dependency>
+
+        <!--在Java应用程序中使用Druid连接池和监控平台,Druid是一个开源的Java数据库连接池和监控平台，提供了高效的数据库连接池和监控功能-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.22</version>
+        </dependency>
+
+        <!--在Spring Boot应用程序中使用MyBatis框架和MyBatis Spring Boot Starter集成库-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.1.2</version>
+        </dependency>
+
+        <!--在Spring Boot应用程序中使用MyBatis-Plus工具库,
+        MyBatis-Plus是基于MyBatis框架的增强工具库，可以帮助开发者更方便地操作数据库-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+
+        <!--在Java应用程序中使用MyBatis-Plus Generator代码生成器。
+        MyBatis-Plus Generator可以根据数据库表结构自动生成Java代码，
+        可以帮助开发者更快速地开发应用程序-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+
+        <!--在Java应用程序中使用Apache Velocity模板引擎。
+        Apache Velocity模板引擎可以通过模板生成文本文件，例如HTML、XML、JSON等-->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity-engine-core</artifactId>
+            <version>2.2</version>
+        </dependency>
+
+        <!--在Spring Boot应用程序中使用Freemarker模板引擎。
+        Freemarker模板引擎是一个流行的模板引擎，可以通过模板生成文本文件，例如HTML、XML、JSON等-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
+        <!--在Spring Boot应用程序中使用PageHelper插件。
+        PageHelper插件是一个流行的MyBatis分页插件，可以帮助开发者更方便地进行分页操作-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.10</version>
+        </dependency>
+
+        <!--在Spring Boot应用程序中使用Springfox Swagger UI模块，
+        从而更方便地生成、查看和测试API文档-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+
+        <!--在Spring Boot应用程序中使用Springfox Swagger2模块，从而更方便地生成API文档-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!--通过配置Spring Boot Maven插件的configuration节点，可以排除lombok依赖，
+        这样在打包时就不会包含lombok依赖，减小打包文件的大小-->
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <!--配置Maven项目的资源目录,在每个资源目录中，又通过includes节点配置了哪些文件应该被包括在资源目录中。
+        包括了yml、properties、xml、html、css、js等类型的文件-->
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.html</include>
+                    <include>**/*.css</include>
+                    <include>**/*.js</include>
+                    <include>**/*.*</include>
+                </includes>
+                <!--通过filtering节点配置了不开启Maven资源过滤器-->
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
+
+</project>

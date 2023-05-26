@@ -1,0 +1,27 @@
+server: # 配置Spring Boot应用程序的端口
+  port: 12345 # 表示应用程序会监听该端口来处理请求
+  servlet: # 配置Spring Boot应用程序的上下文路径
+    context-path: / # 配置Spring Boot应用程序的上下文路径。上下文路径是“/”表示应用程序的所有请求路径都会加上“/”前缀
+
+spring: # 配置Spring Boot应用程序的静态资源目录、数据源、热部署和Jackson时间格式转化
+  resources: # 配置应用程序的静态资源目录
+    static-locations: classpath:/static/,classpath:/templates/ # 应用程序会从这两个目录中加载静态资源
+  datasource: # 配置应用程序的数据源
+    driver-class-name: com.mysql.cj.jdbc.Driver # 指定连接MySQL数据库时使用的JDBC驱动程序
+    type: com.alibaba.druid.pool.DruidDataSource # 数据源
+    url: jdbc:mysql://localhost:3306/communitymaven?useUnicode=true&amp&characterEncoding=utf-8&serverTimezone=UTC # 指定连接MySQL数据库时使用的URL
+    username: root # 用户名
+    password: root  # 密码
+  devtools: # 配置应用程序的热部署
+    livereload: # 开启了livereload
+      enabled: true # 表示应用程序会自动重新加载修改后的静态资源
+  jackson: # 配置应用程序的时间格式转化
+    date-format: yyyy-MM-dd HH:mm:ss # 时间格式
+    time-zone: GMT+8  # 时区
+
+mybatis-plus: # 配置MyBatis-Plus框架的相关参数
+  type-aliases-package: org.example.model # 指定实体类所在的包路径，用于自动扫描实体类，并将其注册为MyBatis的别名
+  mapper-locations: classpath:org/example/dao/*.xml # 指定Mapper接口所在的XML文件路径，用于自动扫描Mapper接口，并将其注册到MyBatis的Mapper注册表中
+  configuration: # 用于配置MyBatis的全局参数
+    map-underscore-to-camel-case: true # 将数据库表中的下划线命名方式转换为Java驼峰命名方式
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 指定MyBatis的日志实现类

@@ -17,9 +17,11 @@ import java.util.List;
  * @Description:
  */
 
-@Component("houseDao")
+@Component("houseDao")  //注解:将该接口注册为一个Spring Bean，使其可以在其他地方使用@Autowired注解进行注入使用
+// 接口继承了BaseMapper接口，继承了BaseMapper的常用方法，例如insert、update、delete、select等方法
 public interface HouseMapper extends BaseMapper<House> {
+    // 根据房屋编号查询房屋信息
     List<House> findHouseAll(@Param("number") String numbers);
-
+    // 根据房屋ID查询房屋信息
     House queryHouseById(@Param("houId") Integer houId);
 }

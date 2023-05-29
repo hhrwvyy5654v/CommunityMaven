@@ -19,7 +19,7 @@ import java.util.Date;
  * @Email: rongquanhuang01@gmail.com
  * @Description:
  */
-@Data
+@Data //自动生成getter、setter、toString等方法,简化代码编写
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "Repair对象", description = "")
@@ -38,9 +38,5 @@ public class Repair implements Serializable {
     private Integer status;
     private Integer clr;
     private String remarks;
-
-
-
-
 }
 

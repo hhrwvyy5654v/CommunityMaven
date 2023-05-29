@@ -18,16 +18,19 @@ import java.io.Serializable;
  * @Email: rongquanhuang01@gmail.com
  * @Description:
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-@ApiModel(value="Repairtype对象", description="")
+@Data //自动生成getter、setter、toString等方法,简化代码编写
+@EqualsAndHashCode(callSuper = false) //自动生成equals和hashCode方法，用于对象比较
+@Accessors(chain = true) //自定义链式调用的参数,返回当前对象
+@ApiModel(value = "Repairtype对象", description = "") //定义了一个名为"Repairtype对象"的类，用于描述一个打卡记录对象,没有详细的描述信息
+
 public class Repairtype implements Serializable {
-    private static final long serialVersionUID=1L;
-    @TableId(value = "id",type=IdType.AUTO)
+    // 序列化相关的内容，用于将Java对象转换为字节流，便于在网络中传输或持久化到磁盘中
+    private static final long serialVersionUID = 1L;
+    // 打卡记录ID，类型为Integer，使用了@TableId注解指定了该字段为主键,主键类型为自增类型
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
-    private String name;
-    private String remarks;
-    private Integer status;
+    private String name;    //打卡类型名称，类型为String，用于表示该打卡类型的名称
+    private String remarks; //打卡类型的备注信息，类型为String，用于记录该打卡类型的一些备注信息
+    private Integer status; //打卡类型的状态，类型为Integer，用于表示该打卡类型的状态，例如启用、禁用等状态
 }
 

@@ -15,9 +15,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan("org.example.dao")
-public class CommunityMaven {
+public class CommunityMavenApplication {
     public static void main() {
-        SpringApplication.run(CommunityMaven.class, args);
+        //SpringApplication.run(CommunityMavenApplication.class, args);
     }
 }
 

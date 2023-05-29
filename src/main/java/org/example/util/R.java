@@ -1,6 +1,6 @@
 package org.example.util;
 
-import java.io.Serializable;
+import java.io.Serializable; //使用了序列化接口Serializable，可以进行序列化和反序列化操作
 import java.util.List;
 
 /**
@@ -27,26 +27,30 @@ public class R implements Serializable {
     private R(int code, String msg, Object data) {
         this.code = code;
         this.msg = msg;
-        this.data=data;
-        if(data!=null){
-            List list= (List) data;
-            this.count=(long)list.size();
+        this.data = data;
+        if (data != null) {
+            List list = (List) data;
+            this.count = (long) list.size();
         }
     }
 
     //静态方法，用于快速构造返回对象(状态码，消息，具体数据)
-    public static R ok(){
-        return new R(Constants.OK_CODE,Constants.OK_MSG,null);
+    public static R ok() {
+        return new R(Constants.OK_CODE, Constants.OK_MSG, null);
     }
+
     public static R ok(Object data) {
         return new R(Constants.OK_CODE, Constants.OK_MSG, data);
     }
+
     public static R ok(String msg, Object data) {
         return new R(Constants.OK_CODE, msg, data);
     }
+
     public static R fail(String msg) {
         return new R(Constants.FAIL_CODE, msg, null);
     }
+
     public static R fail(int errorCode, String msg) {
         return new R(errorCode, msg, null);
     }

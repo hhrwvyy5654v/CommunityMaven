@@ -15,7 +15,7 @@ import java.util.Date;
  * @Datetime: 2023/05/28 17:27
  * @Author: HuangRongQuan
  * @Email: rongquanhuang01@gmail.com
- * @Description:
+ * @Description: Records实体类的定义，对应数据库中的一张表
  */
 
 @Data //自动生成getter、setter、toString等方法,简化代码编写

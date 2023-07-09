@@ -17,7 +17,7 @@ import java.util.Date;
  * @Datetime: 2023/05/28 19:41
  * @Author: HuangRongQuan
  * @Email: rongquanhuang01@gmail.com
- * @Description:
+ * @Description: Repair实体类的定义，对应数据库中的一张表
  */
 @Data //自动生成getter、setter、toString等方法,简化代码编写
 @EqualsAndHashCode(callSuper = false)
@@ -27,7 +27,7 @@ import java.util.Date;
 public class Repair implements Serializable {
     private static final long serialVersionUID=1L;
     private Owner owner;
-    private Repairtype type;
+    private RepairType type;
     @TableId Integer id;
     private String comId;
     @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd")

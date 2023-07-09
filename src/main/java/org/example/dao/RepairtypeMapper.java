@@ -1,7 +1,7 @@
 package org.example.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.example.model.Repairtype;
+import org.example.model.RepairType;
 
 /**
  * @Project: CommunityMaven
@@ -14,5 +14,5 @@ import org.example.model.Repairtype;
  */
 
 // 接口继承了BaseMapper接口，继承了BaseMapper的常用方法，例如insert、update、delete、select等方法
-public interface RepairtypeMapper extends BaseMapper<Repairtype> {
+public interface RepairtypeMapper extends BaseMapper<RepairType> {
 }

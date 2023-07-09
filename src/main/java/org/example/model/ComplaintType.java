@@ -17,7 +17,7 @@ import java.io.Serializable;
  * @Datetime: 2023/05/28 02:07
  * @Author: HuangRongQuan
  * @Email: rongquanhuang01@gmail.com
- * @Description:
+ * @Description: ComplaintType实体类的定义，对应数据库中的一张表
  */
 @Data   //自动生成getter、setter、toString等方法,简化代码编写
 @EqualsAndHashCode(callSuper = false) //自动生成equals和hashCode方法，用于对象比较
@@ -30,8 +30,8 @@ public class ComplaintType implements Serializable {
     private static final long serialVersionUID=1L;
     // 指定了id字段为主键，字段类型为Integer，主键类型为自增类型
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
-    private String name;    //投诉类型的名称，类型为String
+    private Integer id;     // 投诉类型的唯一标识，类型为Integer，并且被指定为主键，主键类型为自增类型
+    private String name;    // 投诉类型的名称，类型为String
     private Integer status; // 投诉类型的状态，类型为Integer,用于表示投诉类型的启用状态，一般使用0表示禁用，1表示启用
 }
 

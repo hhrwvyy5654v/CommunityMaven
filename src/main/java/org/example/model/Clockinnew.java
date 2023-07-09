@@ -28,7 +28,7 @@ import java.util.Date;
 
 public class Clockinnew implements Serializable {
     // 序列化相关的内容，用于将Java对象转换为字节流，便于在网络中传输或持久化到磁盘中
-    private static final long serialVersionUID=1l;
+    private static final long serialVersionUID=1L;
     // 使用Mybatis-Plus中的@TableId注解，用于指定表的主键字段，value表示字段名，type表示主键类型，这里是自增类型
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id; // 主键ID，自增类型

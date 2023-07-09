@@ -14,7 +14,7 @@ import java.util.List;
  * @Datetime: 2023/05/28 01:42
  * @Author: HuangRongQuan
  * @Email: rongquanhuang01@gmail.com
- * @Description:
+ * @Description: 一个Mybatis-Plus中的Mapper接口，用于对数据库的OwnerMapper表进行操作
  */
 @Component("ownerDao") //注解:将该接口注册为一个Spring Bean，使其可以在其他地方使用@Autowired注解进行注入使用
 // 接口继承了BaseMapper接口，继承了BaseMapper的常用方法，例如insert、update、delete、select等方法

@@ -58,8 +58,8 @@ CREATE TABLE `clockinnew`
     `id`            int(11) NOT NULL AUTO_INCREMENT,                                     #主键,自增长的整数类型
     `report_date`   datetime     DEFAULT NULL,                                           #报告日期,日期时间类型
     `owner_id`      int(11)      DEFAULT NULL,                                           #业主ID,整数类型,最多11位数
-    `type1`         int(11)      DEFAULT NULL COMMENT '是否为疑似病例如咳嗽,发热(0或1)',      #是否为疑似病例,整数类型,最多11位数,值为0或1
-    `type2`         int(11)      DEFAULT NULL COMMENT '是否确诊为肺炎病例',                  #是否确诊为肺炎病例,整数类型,最多11位数,值为0或1
+    `type1`         int(11)      DEFAULT NULL COMMENT '是否为疑似病例如咳嗽,发热(0或1)', #是否为疑似病例,整数类型,最多11位数,值为0或1
+    `type2`         int(11)      DEFAULT NULL COMMENT '是否确诊为肺炎病例',              #是否确诊为肺炎病例,整数类型,最多11位数,值为0或1
     `today_address` varchar(100) DEFAULT NULL,                                           #当天所在地点,字符串类型,长度为100
     `remarks`       varchar(255) DEFAULT NULL,                                           #备注信息,字符串类型,长度为255
     PRIMARY KEY (`id`)
@@ -123,7 +123,7 @@ DROP TABLE IF EXISTS `notice`;
 CREATE TABLE `notice`
 (                                                       #创建用于记录公告的信息的信息表
     `id`      int(11) NOT NULL AUTO_INCREMENT,          #主键，自增长的整数类型
-    `topic`   varchar(100) DEFAULT NULL COMMENT '主题',  #公告主题，字符串类型，长度为100
+    `topic`   varchar(100) DEFAULT NULL COMMENT '主题', #公告主题，字符串类型，长度为100
     `content` varchar(250) DEFAULT NULL,                #公告内容，字符串类型，长度为250
     `fbr`     varchar(50)  DEFAULT NULL,                #发布人，字符串类型，长度为50
     `fbdate`  datetime     DEFAULT NULL,                #发布人，字符串类型，长度为50
@@ -239,7 +239,7 @@ CREATE TABLE `repair`
 #使用InnoDB引擎，初始自增长ID为15，字符集为UTF-8
 
 
-DROP TABLE IF EXISTS `repairtype`;
+DROP TABLE IF EXISTS repair_type;
 CREATE TABLE `repairtype`
 (                                              #创建用于记录报修类型信息的数据表
     `id`      int(11) NOT NULL AUTO_INCREMENT, #主键，自增长的整数类型

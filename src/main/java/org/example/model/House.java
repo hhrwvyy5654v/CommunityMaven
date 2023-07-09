@@ -18,7 +18,7 @@ import java.util.Date;
  * @Datetime: 2023/05/28 01:32
  * @Author: HuangRongQuan
  * @Email: rongquanhuang01@gmail.com
- * @Description:
+ * @Description: House实体类的定义，对应数据库中的一张表
  */
 @Data //自动生成getter、setter、toString等方法,简化代码编写
 @EqualsAndHashCode(callSuper = false) //自动生成equals和hashCode方法，用于对象比较

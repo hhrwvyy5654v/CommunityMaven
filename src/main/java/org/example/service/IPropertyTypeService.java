@@ -17,15 +17,21 @@ import java.util.List;
  */
 
 public interface IPropertyTypeService extends IService<PropertyType> {
+    // 用于分页查询PropertyType对象,page表示页码，pageCount表示每页条数
     IPage<PropertyType> findListByPage(Integer page, Integer pageCount);
 
+    // 添加PropertyType对象
     int add(PropertyType propertyType);
 
+    // 删除PropertyType对象
     int delete(Long id);
 
+    // 更新PropertyType对象
     int updateData(PropertyType propertyType);
 
+    // 根据ID查询PropertyType对象
     PropertyType findById(Long id);
 
+    // 查询所有的PropertyType对象
     List<PropertyType> findAll();
 }

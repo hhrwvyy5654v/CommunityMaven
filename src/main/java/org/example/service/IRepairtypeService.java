@@ -17,15 +17,21 @@ import java.util.List;
  */
 
 public interface IRepairtypeService extends IService<RepairType> {
+    // 用于分页查询RepairType对象，page表示页码，pageCount表示每页条数
     IPage<RepairType> findListByPage(Integer page, Integer pageCount);
 
+    // 用于查询所有的RepairType对象
     List<RepairType> findList();
 
+    // 添加RepairType对象
     int add(RepairType repairtype);
 
+    // 删除RepairType对象
     int delete(Long id);
 
+    //更新RepairType对象
     int updateData(RepairType repairtype);
 
+    // 根据ID查询RepairType对象
     RepairType findById(Long id);
 }

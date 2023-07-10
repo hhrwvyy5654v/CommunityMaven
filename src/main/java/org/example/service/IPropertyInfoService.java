@@ -19,18 +19,25 @@ import java.util.Date;
  */
 
 public interface IPropertyInfoService extends IService<PropertyInfo> {
-    PageInfo<PropertyInfo> findPropertyInfoAll(int page, int pagesise,
+    // 用于分页查询所有符合条件的 PropertyInfo 对象，page 表示页码，pageSize 表示每页条数，propertyInfo 表示查询条件
+    PageInfo<PropertyInfo> findPropertyInfoAll(int page, int pageSize,
                                                PropertyInfo propertyInfo);
 
+    // 用于根据房屋ID和时间删除 PropertyInfo 对象。houId 表示房屋ID，endDate 表示时间
     void deleteInfoByHouIdAndTime(@Param("houId") Integer houId, @Param("endDate") Date endDate);
 
+    // 用于分页查询PropertyInfo对象,page 表示页码,pageCount 表示每页条数
     IPage<PropertyInfo> findListByPage(Integer page, Integer pageCount);
 
+    // 添加PropertyInfo对象
     int add(PropertyInfo propertyInfo);
 
+    // 删除PropertyInfo对象
     int delete(Long id);
 
+    // 更新PropertyInfo对象
     int updateData(PropertyInfo propertyInfo);
 
+    // 根据ID查询PropertyInfo对象
     PropertyInfo findById(Long id);
 }

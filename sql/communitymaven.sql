@@ -103,15 +103,15 @@ CREATE TABLE `complaint_type`
 
 DROP TABLE IF EXISTS `house`;
 CREATE TABLE `house`
-(                                                 #创建用于记录房间的信息的数据表
+(                                                 #创建用于记录房屋的信息的数据表
     `id`          int(5) NOT NULL AUTO_INCREMENT, #主键，自增长的整数类型，最多5位数
     `storey`      int(5)        DEFAULT NULL,     #楼层数，整数类型，最多5位数
-    `numbers`     varchar(50)   DEFAULT NULL,     #房间号，字符串类型，长度为50
-    `status`      int(5)        DEFAULT NULL,     #房间状态，整数类型，最多5位数
+    `numbers`     varchar(50)   DEFAULT NULL,     #房屋号，字符串类型，长度为50
+    `status`      int(5)        DEFAULT NULL,     #房屋状态，整数类型，最多5位数
     `into_date`   datetime      DEFAULT NULL,     #入住日期，日期时间类型
     `building_id` int(5)        DEFAULT NULL,     #所在楼宇ID，整数类型，最多5位数
     `remarks`     varchar(50)   DEFAULT NULL,     #备注信息，字符串类型，长度为50
-    `area`        double(10, 2) DEFAULT NULL,     #房间面积，双精度浮点数类型，最多10位数，保留2位小数
+    `area`        double(10, 2) DEFAULT NULL,     #房屋面积，双精度浮点数类型，最多10位数，保留2位小数
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 6
@@ -143,7 +143,7 @@ CREATE TABLE `owner`
     `tel`      varchar(25)  DEFAULT NULL,      #联系电话，字符串类型，长度为25
     `sex`      varchar(5)   DEFAULT NULL,      #性别，字符串类型，长度为5
     `identity` varchar(25)  DEFAULT NULL,      #身份证号，字符串类型，长度为25
-    `house_id` int(11)      DEFAULT NULL,      #房间ID，整数类型，最多11位数
+    `house_id` int(11)      DEFAULT NULL,      #房屋ID，整数类型，最多11位数
     `remarks`  varchar(255) DEFAULT NULL,      #备注信息，字符串类型，长度为255
     `password` varchar(28)  DEFAULT NULL,      #密码，字符串类型，长度为28
     PRIMARY KEY (`id`)
@@ -177,7 +177,7 @@ CREATE TABLE `property_info`
     `start_date` datetime      DEFAULT NULL,      #收费开始日期，日期时间类型
     `end_date`   datetime      DEFAULT NULL,      #收费结束日期，日期时间类型
     `status`     int(2)        DEFAULT NULL,      #收费状态，整数类型，最多2位数
-    `house_id`   int(11)       DEFAULT NULL,      #房间ID，整数类型，最多11位数
+    `house_id`   int(11)       DEFAULT NULL,      #房屋ID，整数类型，最多11位数
     `remarks`    varchar(200)  DEFAULT NULL,      #备注信息，字符串类型，长度为200
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
@@ -208,7 +208,7 @@ CREATE TABLE `records`
     `type_id`    int(11)      DEFAULT NULL,       #记录类型ID，整数类型，最多11位数
     `num`        double(5, 2) DEFAULT NULL,       #记录数值1，浮点数类型，共5位，其中小数点后2位
     `num2`       double(5, 2) DEFAULT NULL,       #记录数值2，浮点数类型，共5位，其中小数点后2位
-    `house_id`   int(11)      DEFAULT NULL,       #房间ID，整数类型，最多11位数
+    `house_id`   int(11)      DEFAULT NULL,       #房屋ID，整数类型，最多11位数
     `up_time`    datetime     DEFAULT NULL,       #上传时间，日期时间类型
     `on_time`    datetime     DEFAULT NULL,       #操作时间，日期时间类型
     `check_time` datetime     DEFAULT NULL,       #审核时间，日期时间类型

@@ -27,6 +27,7 @@ import java.util.List;
 @Service // 注解是Spring框架提供的，它标识这个类是一个服务类，用于处理业务逻辑
 // 继承了ServiceImpl<BuildingMapper, Building>，这是MyBatis-Plus框架提供的一个基础服务实现类，它提供了一些常用的数据库操作方法
 public class BuildingServiceImpl extends ServiceImpl<BuildingMapper, Building> implements IBuildingService {
+
     @Autowired // 将BuildingMapper对象注入到BuildingServiceImpl类中的buildingDao属性中
     private BuildingMapper buildingDao; // 一个BuildingMapper类型的属性，用于进行数据库操作
 

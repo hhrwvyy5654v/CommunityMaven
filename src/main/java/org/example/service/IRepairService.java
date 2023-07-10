@@ -19,19 +19,27 @@ import java.util.List;
  */
 
 public interface IRepairService extends IService<Repair> {
+    // 用于分页查询所有符合条件的Repair对象，page表示页码，pageSize表示每页条数，repair表示查询条件
     PageInfo<Repair> findRepairAll(int page, int pageSize, Repair repair);
 
+    // 用于查询所有的Repair对象
     List<Repair> queryList();
 
+    // 用于分页查询Repair对象，page表示页码，pageCount表示每页条数
     IPage<Repair> findListByPage(Integer page, Integer pageCount);
 
+    // 添加Repair对象
     int add(Repair repair);
 
+    // 删除Repair对象
     int delete(Long id);
 
+    // 更新Repair对象
     int updateData(Repair repair);
 
+    // 根据ID查询Repair对象
     Repair findById(Long id);
 
+    // 查询统计信息
     List<Tongji> queryTongji();
 }

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--一个MyBatis的映射文件，用于定义与数据库表clockin的交互操作-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--指定该映射文件对应的Mapper接口的命名空间-->
+<mapper namespace="org.example.dao.ClockinMapper">
+    <!--定义了一个名为BaseResultMap的结果映射，用于将查询结果映射到org.example.model.Clockin对象-->
+    <resultMap id="BaseResultMap" type="org.example.model.Clockin">
+        <id column="id" property="id"></id>
+        <result column="clock_in_time" property="clockInTime"></result>
+        <result column="owner_id" property="ownerId"></result>
+        <result column="house_id" property="houseId"></result>
+        <result column="building_id" property="buildingId"></result>
+    </resultMap>
+
+    <!--定义了一个名为Base_Column_List的SQL片段，包含了表clockin的列名-->
+    <sql id="Base_Column_List">
+        id, clockintime, owner_id, house_id, building_id
+    </sql>
+
+    <!--定义了一个名为queryClockInAllMap的结果映射，继承自BaseResultMap，并包含了与owner、building和house表的关联关系-->
+    <resultMap id="queryClockInAllMap" type="org.example.model.Clockin" extends="BaseResultMap">
+        <association property="owner" javaType="org.example.model.Owner">
+            <id column="id" property="id"></id>
+            <result column="username" property="username"></result>
+            <result column="tel" property="tel"></result>
+        </association>
+        <association property="building" javaType="org.example.model.Building">
+            <id column="id" property="id"></id>
+            <result column="numbers" property="numbers"></result>
+            <result column="uints" property="uints"></result>
+        </association>
+        <association property="house" javaType="org.example.model.House">
+            <id column="id" property="id"></id>
+            <result column="houseNum" property="numbers"></result>
+        </association>
+    </resultMap>
+
+    <!--定义了一个名为queryClockInAll的查询语句，参数类型为org.example.model.Clockin，结果映射为queryClockInAllMap。该查询语句通过左连接查询clockin、owner、building和house表，并按照clock_in_time降序排序-->
+    <select id="queryClockInAll" parameterType="org.example.model.Clockin" resultMap="queryClockInAllMap">
+        SELECT clockin.*, owner.username, building.number, building.unit, house.numbers houseNum, owner.tel tel
+        FROM clockin
+                 LEFT JOIN owner ON clockin.owner_id = owner.id
+                 LEFT JOIN building ON clockin.building_id = building.id
+                 LEFT JOIN house ON clockin.house_id = house.id
+        ORDER BY clock_in_time DESC
+    </select>
+
+    <!--定义了一个名为queryCountByOwnIdAndTime的查询语句，参数类型为Integer，结果类型为java.util.Date。该查询语句通过左连接查询clockin、owner、building和house表，并根据ownId查询最新的一条打卡记录的clock_in_time-->
+    <select id="queryCountByOwnIdAndTime" resultType="java.util.Date" parameterType="Integer">
+        SELECT clock_in_time
+        FROM clockin
+                 LEFT JOIN OWNER ON clockin.owner_id = owner.id
+                 LEFT JOIN building ON clockin.building_id = building.id
+                 LEFT JOIN house ON clockin.house_id = house.id
+        WHERE clockin.owner_id = #{ownId}
+        ORDER BY clock_in_time DESC
+        LIMIT 1
+    </select>
+
+</mapper>

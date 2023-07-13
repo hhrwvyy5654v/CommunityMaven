@@ -21,6 +21,7 @@ import java.util.List;
 public interface ParkingMapper extends BaseMapper<Parking> {
     // 分页查询所有的Parking对象，返回一个Parking对象的List集合
     List<Parking> queryParkAll(@Param("number") String numbers);
+
     // 查询所有正在使用的Parking对象，返回一个Parking对象的List集合
     List<Parking> queryParkAllByStatus();
 }

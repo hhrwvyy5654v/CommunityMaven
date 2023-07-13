@@ -36,11 +36,11 @@ public class RepairServiceImpl extends ServiceImpl<RepairMapper, Repair> impleme
     // 分页查询所有的报修信息
     public PageInfo<Repair> findRepairAll(int page, int pagesize, Repair repair) {
         // 使用PageHelper来实现分页功能
-        PageHelper.startPage(page,pagesize);
+        PageHelper.startPage(page, pagesize);
         // 调用repairDao的queryBuildAll方法来查询建筑信息
-        List<Repair> list=repairDao.queryRepairAll(repair);
+        List<Repair> list = repairDao.queryRepairAll(repair);
         // 将查询结果封装成PageInfo对象并返回
-        PageInfo<Repair> pageInfo=new PageInfo(list);
+        PageInfo<Repair> pageInfo = new PageInfo(list);
         return pageInfo;
     }
 
@@ -54,7 +54,7 @@ public class RepairServiceImpl extends ServiceImpl<RepairMapper, Repair> impleme
 
     @Override
     // 分页查询报修信息
-    public IPage<Repair> findListByPage(Integer page, Integer pageCount){
+    public IPage<Repair> findListByPage(Integer page, Integer pageCount) {
         // 分页方法，表示从第page页开始，每页显示pageCount条数据
         IPage<Repair> wherePage = new Page<>(page, pageCount);
         // 创建一个Repair对象，作为查询条件
@@ -65,28 +65,28 @@ public class RepairServiceImpl extends ServiceImpl<RepairMapper, Repair> impleme
 
     @Override
     // 添加报修信息
-    public int add(Repair repair){
+    public int add(Repair repair) {
         // 调用baseMapper的insert方法来插入数据
         return baseMapper.insert(repair);
     }
 
     @Override
     // 删除报修信息
-    public int delete(Long id){
+    public int delete(Long id) {
         // 调用baseMapper的deleteById方法来删除指定ID的数据
         return baseMapper.deleteById(id);
     }
 
     @Override
     // 更新报修信息
-    public int updateData(Repair repair){
+    public int updateData(Repair repair) {
         // 调用baseMapper的updateById方法来更新指定ID的数据
         return baseMapper.updateById(repair);
     }
 
     @Override
     // 根据ID查询指定的报修信息
-    public Repair findById(Long id){
+    public Repair findById(Long id) {
         // 调用baseMapper的selectById方法来查询指定ID的数据
         return baseMapper.selectById(id);
     }

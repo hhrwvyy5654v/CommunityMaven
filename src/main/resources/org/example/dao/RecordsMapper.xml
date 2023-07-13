@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--一个MyBatis的映射文件，用于定义与数据库表RecordVo的交互操作-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--指定该映射文件对应的Mapper接口的命名空间-->
+<mapper namespace="org.example.dao.RecordsMapper">
+    <!--定义了一个名为queryRecordsAll的查询语句，用于查询records表的记录-->
+    <select id="queryRecordsAll" parameterType="org.example.model.RecordVo"
+            resultType="org.example.model.RecordVo">
+        # 查询语句的主体部分，查询了records表的所有字段，以及house表的numbers字段，owner表的username字段，和property_type表的name字段
+        SELECT rec.*,
+        hou.numbers,
+        own.username,
+        type.`name` as typename
+        # 查询语句的FROM子句，使用LEFT JOIN连接了property_type、house和owner表
+        FROM records rec
+        LEFT JOIN property_type type ON type.id =
+        rec.type_id
+        LEFT JOIN house hou ON hou.id = rec.house_id
+        LEFT JOIN OWNER own ON own.house_id
+        = hou.id
+        <where>
+            # 如果numbers不为null且不为空字符串，则添加条件"and numbers like '%${numbers}%'"
+            <if test="numbers!=null and numbers!=''">
+                and numbers like '%${numbers}%'
+            </if>
+            # 如果typeId不为null，则添加条件"and type_id=#{typeId}"
+            <if test="typeId!=null ">
+                and type_id=#{typeId}
+            </if>
+        </where>
+    </select>
+
+    <!--定义了一个名为queryByHouIdAndTypeId的查询语句，参数类型为int-->
+    <select id="queryByHouIdAndTypeId" parameterType="int" resultType="org.example.model.Records">
+        select *
+        from records
+        where house_id = #{houId}
+          and type_id = #{typeId}
+        order by id desc
+        limit 1
+    </select>
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--一个MyBatis的映射文件，用于定义与数据库表Repair的交互操作-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--指定该映射文件对应的Mapper接口的命名空间-->
+<mapper namespace="org.example.dao.RepairMapper">
+    <!--定义了一个名为BaseResultMap的结果映射，用于将查询结果映射到org.example.model.Repair对象-->
+    <resultMap id="BaseResultMap" type="org.example.model.Repair">
+        <id column="id" property="id"></id>
+        <result column="com_id" property="comId"></result>
+        <result column="com_date" property="comDate"></result>
+        <result column="handle_date" property="handleDate"></result>
+        <result column="owner_id" property="ownerId"></result>
+        <result column="status" property="status"></result>
+        <result column="clr" property="clr"></result>
+        <result column="remarks" property="remarks"></result>
+    </resultMap>
+
+    <!--定义了一个名为Base_Column_List的SQL片段，包含了表Repair的列名-->
+    <sql id="Base_Column_List"> id, com_id, com_date, handle_date, owner_id, status, clr, remarks </sql>
+
+    <!--定义了一个名为 "queryRepairAllMap" 的结果映射，继承自"BaseResultMap"，用于将查询结果映射到org.example.model.Repair对象-->
+    <resultMap id="queryRepairAllMap" type="org.example.model.Repair" extends="BaseResultMap">
+        <!--定义了一个关联关系，将查询结果中的owner字段映射到org.example.model.Owner对象-->
+        <association property="owner" javaType="org.example.model.Owner">
+            <id property="id" column="id"></id>
+            <result property="username" column="username"></result>
+        </association>
+        <!--定义了一个关联关系，将查询结果中的type字段映射到org.example.model.RepairType对象-->
+        <association property="type" javaType="org.example.model.RepairType">
+            <id property="id" column="id"></id>
+            <result property="name" column="name"></result>
+        </association>
+    </resultMap>
+
+    <!--定义了一个名为queryRepairAll的查询语句，用于查询Repair表的记录-->
+    <select id="queryRepairAll" parameterType="org.example.model.Repair" resultMap="queryRepairAllMap">
+        SELECT rep.*, own.username, type.NAME
+        FROM REPAIR rep
+        LEFT JOIN repair_type type ON type.id
+        = rep.com_id
+        LEFT JOIN `owner` own ON own.id = rep.owner_id
+        <where>
+            <if test="comId!=null">
+                and com_id=#{comId}
+            </if>
+            <if test="status!=null ">
+                and rep.status=#{status}
+            </if>
+            <if test="ownerId!=null ">
+                and rep.owner_id=#{ownerId}
+            </if>
+        </where>
+    </select>
+
+    <!--定义了一个名为queryTongji的查询语句，用于查询Tongji表的记录，用于统计每个报修类型的报修总数-->
+    <select id="queryTongji" resultType="org.example.model.Tongji">
+        SELECT count(info.id) AS counts,
+               type.NAME
+        FROM `repair` info
+                 LEFT JOIN repair_type type ON type.id = info.com_id
+        GROUP BY info.com_id
+    </select>
+
+</mapper>

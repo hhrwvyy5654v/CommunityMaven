@@ -27,43 +27,42 @@ public class PropertyTypeServiceImpl extends ServiceImpl<PropertyTypeMapper, Pro
 
     @Override
     // 分页查询物业费类型信息
-    public IPage<PropertyType> findListByPage(Integer page, Integer pageCount){
+    public IPage<PropertyType> findListByPage(Integer page, Integer pageCount) {
         // 分页方法，表示从第page页开始，每页显示pageCount条数据
         IPage<PropertyType> wherePage = new Page<>(page, pageCount);
         // 创建一个PropertyType对象，作为查询条件
         PropertyType where = new PropertyType();
         // 使用MyBatis-Plus提供的selectPage方法来进行分页查询并返回查询结果
-        return  baseMapper.selectPage(wherePage, Wrappers.query(where));
+        return baseMapper.selectPage(wherePage, Wrappers.query(where));
     }
-
 
 
     @Override
     // 添加物业费类型信息
-    public int add(PropertyType propertyType){
+    public int add(PropertyType propertyType) {
         // 调用baseMapper的deleteById方法来删除指定ID的数据
         return baseMapper.insert(propertyType);
     }
 
     @Override
     // 删除物业费类型信息
-    public int delete(Long id){
+    public int delete(Long id) {
         // 调用baseMapper的insert方法来插入数据
         return baseMapper.deleteById(id);
     }
 
     @Override
     // 更新物业费类型信息
-    public int updateData(PropertyType propertyType){
+    public int updateData(PropertyType propertyType) {
         // 调用baseMapper的updateById方法来更新指定ID的数据
         return baseMapper.updateById(propertyType);
     }
 
     @Override
     // 根据ID查询物业费类型信息
-    public PropertyType findById(Long id){
+    public PropertyType findById(Long id) {
         // 调用baseMapper的selectById方法来查询指定ID的数据
-        return  baseMapper.selectById(id);
+        return baseMapper.selectById(id);
     }
 
     @Override

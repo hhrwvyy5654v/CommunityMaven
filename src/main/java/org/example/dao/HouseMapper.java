@@ -22,6 +22,7 @@ import java.util.List;
 public interface HouseMapper extends BaseMapper<House> {
     // 根据房屋编号查询房屋信息
     List<House> findHouseAll(@Param("number") String numbers);
+
     // 根据房屋ID查询房屋信息
     House queryHouseById(@Param("houId") Integer houId);
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--一个MyBatis的映射文件，用于定义与数据库表RepairType的交互操作-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--指定该映射文件对应的Mapper接口的命名空间-->
+<mapper namespace="org.example.dao.RepairtypeMapper">
+    <!--定义了一个名为BaseResultMap的结果映射，用于将查询结果映射到org.example.model.RepairType对象-->
+    <resultMap id="BaseResultMap" type="org.example.model.RepairType">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="remarks" property="remarks"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+    <!--定义了一个名为Base_Column_List的SQL片段，包含了表RepairType的列名-->
+    <sql id="Base_Column_List">
+        id, name, remarks, status
+    </sql>
+
+</mapper>

@@ -1,0 +1,11 @@
+{
+  "comment": "一个包含了上传文件的相关信息的API接口，表示上传成功，并提供了两个上传文件的路径",
+  "code": 1,
+  "msg": "上传成功",
+  "data": {
+    "url": [
+      "../images/logo.png",
+      "../images/captcha.jpg"
+    ]
+  }
+}

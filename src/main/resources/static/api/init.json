@@ -1,0 +1,115 @@
+{
+  "introduce": "一个JSON格式的配置文件，主要用于配置一个社区物业管理系统的前端界面",
+  "comment": "首页信息",
+  "homeInfo": {
+    "title": "首页",
+    "href": "page/business/park/CarParkIndex.html",
+    "comment": "配置首页的信息,将首页设置为车位收费管理页面"
+  },
+  "comment": "Logo信息",
+  "logoInfo": {
+    "title": "社区物业管理",
+    "image": "image/favicon.ico"
+  },
+  "comment": "菜单信息,target表示菜单项链接的目标窗口,其中_self表示在当前窗口打开,_blank表示在新窗口打开",
+  "menuInfo": [
+    {
+      "title": "社区物业管理",
+      "icon": "fa fa-lemon-o",
+      "target": "_self",
+      "child": [
+        {
+          "title": "核心业务处理",
+          "icon": "fa fa-lemon-o",
+          "target": "_self",
+          "child": [
+            {
+              "comment": "一个菜单项'核心业务处理'及其下级菜单项，用于展示和管理车位收费、物业收费、投诉信息和报修信息等核心业务"
+            },
+            {
+              "title": "车位收费管理",
+              "href": "page/business/park/CarParkIndex.html",
+              "icon": "fa fa-dashboard",
+              "target": "_self"
+            },
+            {
+              "title": "物业收费管理",
+              "href": "page/business/property/PropertyIndex.html",
+              "icon": "fa fa-angle-double-down",
+              "target": "_self"
+            },
+            {
+              "title": "投诉信息管理",
+              "href": "page/business/complaint/ComplaintIndex.html",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            },
+            {
+              "title": "报修信息管理",
+              "href": "page/business/repair/RepairIndex.html",
+              "icon": "fa fa-adn",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "comment": "一个基础信息管理的菜单配置，用于构建一个网页的导航菜单",
+          "title": "基础信息管理",
+          "icon": "fa fa-lemon-o",
+          "target": "_self",
+          "child": [
+            {
+              "title": "楼宇管理",
+              "href": "page/base/build/BuildIndex.html",
+              "icon": "fa fa-dot-circle-o",
+              "target": "_self"
+            },
+            {
+              "title": "房屋管理",
+              "href": "page/base/house/HouseIndex.html",
+              "icon": "fa fa-adn",
+              "target": "_self"
+            },
+            {
+              "title": "业主管理",
+              "href": "page/base/owner/OwnerIndex.html",
+              "icon": "fa fa-angle-double-down",
+              "target": "_self"
+            },
+            {
+              "title": "车位管理",
+              "href": "page/base/park/ParkIndex.html",
+              "icon": "fa fa-dashboard",
+              "target": "_self"
+            },
+            {
+              "title": "抄表管理",
+              "href": "page/base/record/RecordIndex.html",
+              "icon": "fa fa-edit",
+              "target": "_self"
+            },
+            {
+              "title": "用户管理",
+              "href": "page/base/admin/index.html",
+              "icon": "fa fa-user-circle-o",
+              "target": "_self"
+            }
+          ]
+        },
+        {
+          "title": "数据统计分析",
+          "icon": "fa fa-lemon-0",
+          "target": "_self",
+          "child": [
+            {
+              "title": "报修统计分析",
+              "href": "page/count/index3.html",
+              "icon": "fa fa-area-chart",
+              "target": "_self"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -22,6 +22,7 @@ import java.util.List;
 public interface RecordsMapper extends BaseMapper<Records> {
     // 查询所有的Records对象，返回一个RecordVo对象的List集合
     List<RecordVo> queryRecordsAll(RecordVo recordVo);
+
     // 根据房子ID和类型ID获取最后一次记录信息
-    Records queryByHouIdAndTypeId(@Param("houId")Integer houId,@Param("typeId") Integer typeId);
+    Records queryByHouIdAndTypeId(@Param("houId") Integer houId, @Param("typeId") Integer typeId);
 }

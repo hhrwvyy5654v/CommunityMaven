@@ -1,6 +1,6 @@
 package org.example.util;
 
-import java.io.Serializable; //使用了序列化接口Serializable，可以进行序列化和反序列化操作
+import java.io.Serializable;
 import java.util.List;
 
 /**

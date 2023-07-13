@@ -25,7 +25,7 @@ import java.util.Date;
 @Data   //自动生成getter、setter、toString等方法,简化代码编写
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="Carcharge对象", description="")
+@ApiModel(value = "Carcharge对象", description = "")
 
 public class Carcharge implements Serializable {
     // 序列化相关的内容，用于将Java对象转换为字节流，便于在网络中传输或持久化到磁盘中
@@ -33,9 +33,9 @@ public class Carcharge implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id; //主键ID，自增类型
     //@JsonFormat注解是Jackson库中的注解，用于指定日期格式化的方式。它可以用于类、字段、方法等上面
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date payDate;   //缴费日期，日期类型
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private String endDate; //缴费截至日期，日期类型
     private Double money;   //缴费金额，浮点型
     private Integer status; //缴费状态，整型，可能的取值为0或1

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--一个MyBatis的映射文件，用于定义与数据库表PropertyInfo的交互操作-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--指定该映射文件对应的Mapper接口的命名空间-->
+<mapper namespace="org.example.dao.PropertyInfoMapper">
+    <!--定义了一个名为BaseResultMap的结果映射，用于将查询结果映射到org.example.model.PropertyInfo对象-->
+    <resultMap id="BaseResultMap" type="org.example.model.PropertyInfo">
+        <id column="id" property="id"></id>
+        <result column="type_id" property="typeId"></result>
+        <result column="money" property="money"></result>
+        <result column="start_date" property="startDate"></result>
+        <result column="end_date" property="endDate"></result>
+        <result column="status" property="status"></result>
+        <result column="house_id" property="houseId"></result>
+        <result column="remarks" property="remarks"></result>
+    </resultMap>
+
+    <!--定义了一个名为Base_Column_List的SQL片段，包含了表PropertyInfo的列名-->
+    <sql id="Base_Column_List"> id, type_id, money, start_date, end_date, status, house_id, remarks </sql>
+
+    <!--定义了一个名为deleteByHouIdAndTime的删除语句，用于根据house_id和end_date删除记录-->
+    <delete id="deleteByHouIdAndTime">
+        delete
+        from property_info
+        where house_id = #{houId}
+          and end_date = #{endDate}
+    </delete>
+
+    <!--定义了一个名为queryListAllMap的结果映射，继承自"BaseResultMap"，用于将查询结果映射到org.example.model.PropertyInfo对象-->
+    <resultMap id="queryListAllMap" type="org.example.model.PropertyInfo" extends="BaseResultMap">
+        <!--定义了一个关联关系，将查询结果中的owner字段映射到org.example.model.Owner对象-->
+        <association property="owner" javaType="org.example.model.Owner">
+            <id column="id" property="id"></id>
+            <result column="username" property="username"></result>
+        </association>
+        <!--定义了一个关联关系，将查询结果中的house字段映射到org.example.model.House对象-->
+        <association property="house" javaType="org.example.model.House">
+            <id column="id" property="id"></id>
+            <result column="numbers" property="numbers"></result>
+        </association>
+        <!--定义了一个关联关系，将查询结果中的type字段映射到org.example.model.PropertyType对象-->
+        <association property="type" javaType="org.example.model.PropertyType">
+            <id column="id" property="id"></id>
+            <result column="name" property="name"></result>
+        </association>
+    </resultMap>
+
+    <!--定义了一个名为queryListAll的查询语句，用于查询property_info表的记录-->
+    <select id="queryListAll" parameterType="org.example.model.PropertyInfo"
+            resultMap="queryListAllMap">
+        # 查询语句的主体部分，查询了property_info表的所有字段，以及owner表的username字段，house表的numbers字段，和property_type表的NAME字段
+        SELECT info.*, own.username, hou.numbers, type.NAME
+        # 查询语句的FROM子句，使用LEFT JOIN连接了property_info、house、owner和property_type表
+        FROM property_info info
+        LEFT JOIN house hou ON hou.id = info.house_id
+        LEFT JOIN `owner` own ON
+        own.house_id = hou.id
+        LEFT JOIN property_type type ON type.id = info.type_id
+        <where>
+            # 如果参数house不为空，则添加条件
+            <if test="house!=null">
+                # 如果参数house的numbers字段不为空，则添加条件
+                <if test="house.numbers!=null">
+                    # 添加了一个模糊查询条件，查询house表的numbers字段包含参数house的numbers字段的记录
+                    and hou.numbers like '%${house.numbers}%'
+                </if>
+            </if>
+            # 如果参数status不为空且不为空字符串，则添加条件
+            <if test="status!=null and status !=''">
+                # 添加了一个等于条件，查询property_info表的status字段等于参数status的记录
+                and info.status =#{status}
+            </if>
+            # 如果参数houseId不为空，则添加条件
+            <if test="houseId!=null">
+                # 添加了一个等于条件，查询property_info表的house_id字段等于参数houseId的记录
+                and info.house_id =#{houseId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--一个MyBatis的映射文件，用于定义与数据库表clockin的交互操作-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--指定该映射文件对应的Mapper接口的命名空间-->
+<mapper namespace="org.example.dao.ClockinnewMapper">
+    <!--定义了一个名为BaseResultMap的结果映射，用于将查询结果映射到org.example.model.Clockinnew对象-->
+    <resultMap id="BaseResultMap" type="org.example.model.Clockinnew">
+        <id column="id" property="id"></id>
+        <result column="report_date" property="reportDate"></result>
+        <result column="owner_id" property="owerId"></result>
+        <result column="type1" property="type1"></result>
+        <result column="type2" property="type2"></result>
+        <result column="today_address" property="todayAddress"></result>
+        <result column="remarks" property="remarks"></result>
+    </resultMap>
+    <!--定义了一个名为Base_Column_List的SQL片段，包含了表Clockinnew的列名-->
+    <sql id="Base_Column_List"> id, report_date, order_id, type1, type2, today_address, remarks </sql>
+
+    <!--定义了一个名为queryClockInAllMap的结果映射，继承自BaseResultMap，并包含了与owner表的关联关系-->
+    <resultMap id="queryClockInAllMap" type="org.example.model.Clockinnew" extends="BaseResultMap">
+        <association property="owner" javaType="org.example.model.Owner">
+            <id column="id" property="id"></id>
+            <result column="username" property="username"></result>
+            <result column="tel" property="tel"></result>
+        </association>
+    </resultMap>
+
+    <!--定义了一个名为queryCountByOwnId的查询语句，用于查询指定ownerId的最新一条clockin记录的report_date。这个查询语句也使用了LEFT
+    JOIN关联owner表，并根据条件进行筛选和排序-->
+    <select id="queryClockInAll" parameterType="org.example.model.Clockinnew" resultMap="queryClockInAllMap">
+        SELECT cloc.*, owner.username, owner.tel
+        FROM clockinnew cloc
+        LEFT JOIN owner ON owner.id = cloc.owner_id
+        <where>
+            <if test="owner!=null">
+                <if test="owner.username!=null and owner.username!=''">
+                    and owner.username = #{owner.username}
+                </if>
+            </if>
+            <if test="ownerId!=null">
+                and cloc.owner_id = #{ownerId}
+            </if>
+        </where>
+        order by report_date desc
+    </select>
+
+    <!--定义了与数据库表clockin的交互操作，包括查询所有clockin记录和查询指定ownerId的最新一条clockin记录的report_date。同时，它还定义了结果映射，将查询结果映射到对应的Java对象中-->
+    <select id="queryCountByOwnId" resultType="java.util.Date" parameterType="Integer">
+        SELECT report_date
+        FROM clockinnew cloc
+                 LEFT JOIN OWNER ON cloc.owner_id = owner.id
+        WHERE cloc.owner_id = #{ownerId}
+        ORDER BY report_date DESC
+        LIMIT 1
+    </select>
+
+</mapper>

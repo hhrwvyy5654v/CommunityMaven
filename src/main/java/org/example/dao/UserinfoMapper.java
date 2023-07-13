@@ -22,10 +22,12 @@ import java.util.List;
 // 接口继承了BaseMapper接口，继承了BaseMapper的常用方法，例如insert、update、delete、select等方法
 public interface UserinfoMapper extends BaseMapper<Userinfo> {
     // 查询所有的Userinfo对象，返回一个Userinfo对象的List集合
-    List<Userinfo>queryUserinfoAll(Userinfo userinfo);
+    List<Userinfo> queryUserinfoAll(Userinfo userinfo);
+
     // 根据用户名和密码查询Userinfo对象
     Userinfo queryUserByNameAndPwd(Userinfo userinfo);
+
     // 根据用户名删除Userinfo对象
-    void deleteUserByUsername(@Param("username2")String username);
+    void deleteUserByUsername(@Param("username2") String username);
 
 }

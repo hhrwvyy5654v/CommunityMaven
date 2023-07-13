@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--一个MyBatis的映射文件，用于操作数据库中的Building表-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--指定该映射文件对应的Mapper接口的命名空间-->
+<mapper namespace="org.example.dao.BuildingMapper">
+    <!--定义名为BaseResultMap的结果映射，用于将查询结果映射到Building模型类-->
+    <resultMap id="BaseResultMap" type="org.example.model.Building">
+        <id column="id" property="id"></id>
+        <result column="numbers" property="numbers"></result>
+        <result column="uints" property="uints"></result>
+        <result column="reamrks" property="remarks"></result>
+    </resultMap>
+
+    <!--定义了一个名为Base_Column_List的SQL片段，包含了查询结果所需的列名-->
+    <sql id="Base_Column_List">
+        id, numbers, uints, remarks
+    </sql>
+
+    <!--定义了一个名为queryBuildAll的查询语句，参数类型为String，结果类型为Building-->
+    <select id="queryBuildAll" parameterType="string" resultType="org.example.model.Building">
+        select * from building # 查询语句，从building表中查询所有列的数据
+        <where># 条件语句的开始标签
+            <if test="numbers!=null and numbers!=''"># 如果numbers参数不为null且不为空字符串，则执行下面的条件语句
+                and numbers like '%${numbers}%' # 条件语句，根据numbers参数进行模糊查询
+            </if>
+        </where>
+    </select>
+
+    <!--定义了一个名为queryBuildById的查询语句，参数类型为Integer，结果类型为Building-->
+    <select id="queryBuildById" resultType="org.example.model.Building" parameterType="Integer">
+        # 查询语句，根据buildId参数查询对应的楼宇信息
+        select *
+        from building
+        where id = #{buildId}
+    </select>
+
+</mapper>

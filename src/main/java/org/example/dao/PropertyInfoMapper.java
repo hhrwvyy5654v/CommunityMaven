@@ -20,7 +20,8 @@ import java.util.List;
 // 接口继承了BaseMapper接口，继承了BaseMapper的常用方法，例如insert、update、delete、select等方法
 public interface PropertyInfoMapper extends BaseMapper<PropertyInfo> {
     // 根据房子ID和登记时间删除记录信息
-    void deleteByHouIdAndTime( @Param("houId") Integer houId, @Param("endDate") String onTime);
+    void deleteByHouIdAndTime(@Param("houId") Integer houId, @Param("endDate") String onTime);
+
     // 查询所有的PropertyInfo对象，返回一个PropertyInfo对象的List集合
     List<PropertyInfo> queryListAll(PropertyInfo propertyInfo);
 }

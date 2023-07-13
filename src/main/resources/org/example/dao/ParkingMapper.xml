@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--一个MyBatis的映射文件，用于定义与数据库表Parking的交互操作-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--指定该映射文件对应的Mapper接口的命名空间-->
+<mapper namespace="org.example.dao.ParkingMapper">
+    <!--定义了一个名为BaseResultMap的结果映射，用于将查询结果映射到org.example.model.Parking对象-->
+    <resultMap id="BaseResultMap" type="org.example.model.Parking">
+        <id column="id" property="id"></id>
+        <result column="numbers" property="numbers"></result>
+        <result column="status" property="status"></result>
+        <result column="owner_id" property="ownerId"></result>
+        <result column="remarks" property="remarks"></result>
+    </resultMap>
+
+    <!--定义了一个名为Base_Column_List的SQL片段，包含了表Parking的列名-->
+    <sql id="Base_Column_List"> id, numbers, status, owner_id, remarks </sql>
+
+    <!-- 定义了一个名为queryParkAllMap的结果映射，它扩展了BaseResultMap，并且包含了一个关联属性owner，它的类型是org.example.model.Owner。这个结果映射将查询结果映射到org.example.model.Parking对象，并且包含了owner的id、username和tel这些列的映射 -->
+    <resultMap id="queryParkAllMap" type="org.example.model.Parking" extends="BaseResultMap">
+        <association property="owner" javaType="org.example.model.Owner">
+            <id column="id" property="id"></id>
+            <result property="username" column="username"></result>
+            <result property="tel" column="tel"></result>
+        </association>
+    </resultMap>
+
+    <!--
+    定义了一个名为queryParkAll的查询语句，它接受一个字符串类型的参数，并且使用queryParkAllMap作为结果映射。这个查询语句从parking表和owner表进行左连接查询，并且根据条件动态生成查询语句，其中numbers列的值包含参数中的字符串 -->
+    <select id="queryParkAll" parameterType="string" resultMap="queryParkAllMap">
+        SELECT park.*,
+        own.username,
+        own.tel
+        FROM parking park
+        LEFT JOIN OWNER own ON own.id = park.owner_id
+        <where>
+            <if test="numbers!=null and numbers!=''">
+                and numbers like '%${numbers}%'
+            </if>
+        </where>
+    </select>
+
+    <!--
+    定义了一个名为queryParkAllByStatus的查询语句，它的结果类型是org.example.model.Parking。这个查询语句从parking表中查询status为1且owner_id不为空的记录 -->
+    <select id="queryParkAllByStatus" resultType="org.example.model.Parking">
+        select *
+        from parking
+        where status = 1
+          and owner_id is not null
+    </select>
+
+</mapper>

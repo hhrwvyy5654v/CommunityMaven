@@ -34,23 +34,23 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
     // 用于分页查询所有的房屋信息
     public PageInfo<Owner> findOwnerAll(int page, int pageSize, Owner owner) {
         // 使用PageHelper来实现分页功能
-        PageHelper.startPage(page,pageSize);
+        PageHelper.startPage(page, pageSize);
         // 调用ownerDao的queryBuildAll方法来查询业主信息
-        List<Owner> list=ownerDao.queryOwnerAll(owner);
+        List<Owner> list = ownerDao.queryOwnerAll(owner);
         // 将查询结果封装成PageInfo对象并返回
-        PageInfo<Owner> pageInfo=new PageInfo<>(list);
+        PageInfo<Owner> pageInfo = new PageInfo<>(list);
         return pageInfo;
     }
 
     @Override
     // 用于分页查询业主信息
-    public IPage<Owner> findListByPage(Integer page, Integer pageCount){
+    public IPage<Owner> findListByPage(Integer page, Integer pageCount) {
         // 分页方法，表示从第page页开始，每页显示pageCount条数据
         IPage<Owner> wherePage = new Page<>(page, pageCount);
         // 创建一个Owner对象，作为查询条件
         Owner where = new Owner();
         // 使用MyBatis-Plus提供的selectPage方法来进行分页查询并返回查询结果
-        return  baseMapper.selectPage(wherePage, Wrappers.query(where));
+        return baseMapper.selectPage(wherePage, Wrappers.query(where));
     }
 
     @Override
@@ -61,26 +61,26 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
 
     @Override
     // 添加业主信息
-    public int add(Owner owner){
+    public int add(Owner owner) {
         return baseMapper.insert(owner);
     }
 
     @Override
     // 删除业主信息
-    public int delete(Long id){
+    public int delete(Long id) {
         return baseMapper.deleteById(id);
     }
 
     @Override
     // 更新业主信息
-    public int updateData(Owner owner){
+    public int updateData(Owner owner) {
         return baseMapper.updateById(owner);
     }
 
     @Override
     // 根据ID查询业主信息
-    public Owner findById(Long id){
-        return  baseMapper.selectById(id);
+    public Owner findById(Long id) {
+        return baseMapper.selectById(id);
     }
 
     @Override

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--一个MyBatis的映射文件，用于操作数据库中的Carcharge表-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--指定该映射文件对应的Mapper接口的命名空间-->
+<mapper namespace="org.example.dao.CarchargeMapper">
+    <!--定义名为BaseResultMap的结果映射，用于将查询结果映射到Building模型类-->
+    <resultMap id="BaseResultMap" type="org.example.model.Carcharge">
+        <id column="id" property="id"></id>
+        <result column="pay_date" property="payDate"></result>
+        <result column="end_date" property="endDate"></result>
+        <result column="money" property="money"></result>
+        <result column="status" property="status"></result>
+        <result column="owner_id" property="ownerId"></result>
+        <result column="remarks" property="remarks"></result>
+        <result column="type" property="type"></result>
+        <result column="park_id" property="parkId"></result>
+    </resultMap>
+
+    <!--定义了一个名为Base_Column_List的SQL片段，包含了查询结果所需的列名-->
+    <sql id="Base_Column_List">id, pay_date, end_date, money, status, owner_id, remarks, type,
+        park_id</sql>
+
+    <!--定义了一个名为queryCarChargeAllMap的结果映射，继承自BaseResultMap，并用于将查询结果映射到Carcharge模型类-->
+    <resultMap id="queryCarChargeAllMap" type="org.example.model.Carcharge" extends="BaseResultMap">
+        <!--定义了一个owner属性的关联映射，将查询结果中的owner信息映射到Carcharge模型类的owner属性-->
+        <association property="owner" javaType="org.example.model.Owner">
+            <!--定义了一个id属性的映射，将数据库表中的id列映射到Owner模型类的id属性-->
+            <id column="id" property="id"></id>
+            <!--定义了一个username属性的映射，将数据库表中的username列映射到Owner模型类的username属性-->
+            <result column="username" property="username"></result>
+        </association>
+        <!--定义了一个parking属性的关联映射，将查询结果中的parking信息映射到Carcharge模型类的parking属性-->
+        <association property="parking" javaType="org.example.model.Parking">
+            <!--定义了一个id属性的映射，将数据库表中的id列映射到Parking模型类的id属性-->
+            <id column="id" property="id"></id>
+            <!--定义了一个numbers属性的映射，将数据库表中的numbers列映射到Parking模型类的numbers属性-->
+            <result column="numbers" property="numbers"></result>
+        </association>
+    </resultMap>
+
+    <!--定义了一个名为queryCarChargeAll的查询语句，参数类型为Carcharge，结果映射为queryCarChargeAllMap-->
+    <select id="queryCarChargeAll" resultMap="queryCarChargeAllMap" parameterType="org.example.model.Carcharge">
+        # 查询语句，从carcharge表中查询所有列的数据，并通过LEFT JOIN关联查询parking和owner表的相关信息
+        SELECT car.*, park.numbers, own.username
+        FROM carcharge car
+        LEFT JOIN parking park ON park.id = car.park_id
+        LEFT JOIN `owner` own ON
+        own.id = car.owner_id
+        <where>
+            <if test="parking!=null">
+                <if test="parking.numbers!=null and parking.numbers!=''">
+                    and park.numbers = #{parking.numbers}
+                </if>
+            </if>
+            <if test="status!=null and status!=''">
+                and car.status=#{status}
+            </if>
+            <if test="ownerId!=null">
+                and car.owner_id=#{ownerId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

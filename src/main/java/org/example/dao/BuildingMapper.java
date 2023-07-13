@@ -1,9 +1,9 @@
 package org.example.dao;
 
-import org.example.model.Building;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+import org.example.model.Building;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import java.util.List;
 @Component("buildingDao")
 
 // 接口继承了BaseMapper接口，继承了BaseMapper的常用方法，例如insert、update、delete、select等方法
-public interface BuildingMapper extends BaseMapper<Building>{
+public interface BuildingMapper extends BaseMapper<Building> {
     //通过传入的numbers参数进行查询，返回一个Building对象列表
     List<Building> queryBuildAll(@Param("numbers") String numbers);
 

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--一个MyBatis的映射文件，用于定义与数据库表clockin的交互操作-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--指定该映射文件对应的Mapper接口的命名空间-->
+<mapper namespace="org.example.dao.OwnerMapper">
+    <!--定义了一个名为BaseResultMap的结果映射，用于将查询结果映射到org.example.model.Owner对象-->
+    <resultMap id="BaseResultMap" type="org.example.model.Owner">
+        <id column="id" property="id"></id>
+        <result column="username" property="username"></result>
+        <result column="tel" property="tel"></result>
+        <result column="sex" property="sex"></result>
+        <result column="identity" property="identity"></result>
+        <result column="house_id" property="houseId"></result>
+        <result column="remarks" property="remarks"></result>
+        <result column="password" property="password"></result>
+    </resultMap>
+    <!--定义了一个名为Base_Column_List的SQL片段，包含了表Owner的列名-->
+    <sql id="Base_Column_List"> id, username, tel, sex, identity, house_id, remarks, password </sql>
+
+    <!--定义了一个名为queryOwnerAllMap的结果映射，继承自BaseResultMap，并添加了一个关联映射-->
+    <resultMap id="queryOwnerAllMap" type="org.example.model.Owner" extends="BaseResultMap">
+        <!-- 定义了一个关联映射，将Owner对象的house属性关联到House对象 -->
+        <association property="house" javaType="org.example.model.House">
+            <!-- 定义了一个id属性的映射，将数据库表的id列映射到House对象的id属性 -->
+            <id column="id" property="id"></id>
+            <!-- 定义了一个numbers属性的映射，将数据库表的numbers列映射到House对象的numbers属性 -->
+            <result property="numbers" column="numbers"></result>
+        </association>
+    </resultMap>
+
+    <!-- 定义了一个名为queryOwnerAll的查询语句，参数类型为org.example.model.Owner，结果类型为queryOwnerAllMap -->
+    <select id="queryOwnerAll" parameterType="org.example.model.Owner" resultMap="queryOwnerAllMap">
+        SELECT own.*, hou.numbers
+        FROM owner own
+        LEFT JOIN house hou ON hou.id = own.house_id
+        <where>
+            <if test="tel!=null and tel !=''">
+                and tel like '%${tel}%'
+            </if>
+            <if test="identity!=null and identity !=''">
+                and identity like '%${identity}%'
+            </if>
+        </where>
+        order by own.id desc
+    </select>
+
+    <!-- 定义了一个名为queryOwnerByName的查询语句，参数类型为String，结果类型为org.example.model.Owner -->
+    <select id="queryOwnerByName" parameterType="string" resultType="org.example.model.Owner">
+        select *
+        from owner
+        where username = #{username}
+    </select>
+
+    <!-- 定义了一个名为queryOwnerById的查询语句，参数类型为long，结果类型为org.example.model.Owner -->
+    <select id="queryOwnerById" parameterType="long" resultType="org.example.model.Owner">
+        select *
+        from owner
+        where id = #{id}
+    </select>
+
+    <!-- 定义了一个名为deleteOwnerUserByUserName的删除语句，参数类型为String -->
+    <delete id="deleteOwnerUserByUserName" parameterType="String">
+        delete
+        from owner
+        where username = #{username2}
+    </delete>
+
+</mapper>

@@ -36,7 +36,7 @@ public class Clockin implements Serializable {
     // 同时，locale属性为"zh"，表示本地化信息为中文，timezone属性为"GMT+8"，表示时区为北京时间
     @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date clockInTime;   //打卡时间，日期类型
-    private Integer owerId; //所有者ID，整型
+    private Integer ownerId; //所有者ID，整型
     private Integer houseId; //房屋ID，整型
     private Integer buildingId; //楼房ID，整型
     private Owner owner;    // 所有者对象，Owner类型

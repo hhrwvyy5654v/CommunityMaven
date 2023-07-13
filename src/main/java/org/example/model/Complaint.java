@@ -41,7 +41,8 @@ public class Complaint implements Serializable {
     @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date handleDate;
     private Integer ownerId;     // 业主的ID，类型为Integer
-    private Integer crl;        // 表示处理结果，类型为Integer
+    private Integer status;      // 投诉状态，类型为Integer
+    private Integer clr;        // 表示处理结果，类型为Integer
     private String remarks;    //备注信息，类型为String
 }
 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--一个MyBatis的映射文件，用于定义与数据库表Userinfo的交互操作-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--指定该映射文件对应的Mapper接口的命名空间-->
+<mapper namespace="org.example.dao.UserinfoMapper">
+
+    <!--定义了一个名为BaseResultMap的结果映射，用于将查询结果映射到org.example.model.Userinfo对象-->
+    <resultMap id="BaseResultMap" type="org.example.model.Userinfo">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="type" property="type"/>
+        <result column="remarks" property="remarks"/>
+    </resultMap>
+
+    <!--定义了一个名为Base_Column_List的SQL片段，包含了表Userinfo的列名-->
+    <sql id="Base_Column_List"> id, username, password, type, remarks </sql>
+
+    <!--定义了一个名为queryUserinfoAll的查询语句，用于根据type条件查询userinfo表的语句，实现按类型查询用户信息-->
+    <select id="queryUserinfoAll" parameterType="org.example.model.Userinfo"
+            resultType="org.example.model.Userinfo">
+        select * from
+        userinfo
+        <where>
+            <if test="type!=null">
+                and type=#{type}
+            </if>
+        </where>
+    </select>
+
+    <!--定义了一个名为queryUserByNameAndPwd的查询语句，根据用户名、密码和类型查询userinfo表的语句,用于登录验证-->
+    <select id="queryUserByNameAndPwd" resultType="org.example.model.Userinfo"
+            parameterType="org.example.model.Userinfo">
+        select *
+        from userinfo u
+        where username =
+              #{username}
+          and u.password = #{password}
+          and type = #{type}
+    </select>
+
+    <!--定义了一个名为deleteUserByUsername的查询语句，根据用户名删除userinfo表记录的语句-->
+    <delete id="deleteUserByUsername" parameterType="String">
+        delete
+        from userinfo
+        where username =
+              #{username2}
+    </delete>
+
+</mapper>

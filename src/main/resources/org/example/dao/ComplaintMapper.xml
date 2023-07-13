@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--一个MyBatis的映射文件，用于操作数据库中的Complaint表-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--指定该映射文件对应的Mapper接口的命名空间-->
+<mapper namespace="org.example.dao.ComplaintMapper">
+    <!--定义名为BaseResultMap的结果映射，用于将查询结果映射到Complaint模型类-->
+    <resultMap id="BaseResultMap" type="org.example.model.Complaint">
+        <id column="id" property="id"></id>
+        <result column="com_id" property="comId"></result>
+        <result column="com_date" property="comDate"></result>
+        <result column="handle_date" property="handleDate"></result>
+        <result column="owner_id" property="ownerId"></result>
+        <result column="status" property="status"></result>
+        <result column="clr" property="clr"></result>
+        <result column="remarks" property="remarks"></result>
+    </resultMap>
+
+    <!--定义了一个名为Base_Column_List的SQL片段，包含了查询结果所需的列名-->
+    <sql id="Base_Column_List">
+        id, com_id, com_date, handle_date, owner_id, status, clr, remarks
+    </sql>
+
+    <!-- 定义了一个名为queryComplaintAllMap的结果映射，继承自BaseResultMap，并包含了与owner表和complaint_type表的关联关系。这个结果映射还包含了owner表的username列名和对应的属性，以及complaint_type表的name列名和对应的属性 -->
+    <resultMap id="queryComplaintAllMap" type="org.example.model.Complaint" extends="BaseResultMap">
+        <association property="owner" javaType="org.example.model.Owner">
+            <id property="id" column="id"></id>
+            <result property="username" column="username"></result>
+        </association>
+        <association property="type" javaType="org.example.model.ComplaintType">
+            <id property="id" column="id"></id>
+            <result property="name" column="name"></result>
+        </association>
+    </resultMap>
+
+    <!-- 定义了一个名为queryComplaintAll的查询语句，用于查询所有的complaint记录，并将结果映射到queryComplaintAllMap定义的结果映射中。这个查询语句使用了LEFT JOIN关联complaint_type表和owner表，并根据条件进行筛选 -->
+    <select id="queryComplaintAll" parameterType="org.example.model.Complaint" resultMap="queryComplaintAllMap">
+        SELECT com.*, own.username, type.NAME
+        FROM complaint com
+        LEFT JOIN complaint_type type ON type.id = com.com_id
+        LEFT JOIN `owner` own ON own.id = com.owner_id
+        <where>
+            <if test="comId!=null">
+                and com_id=#{comId}
+            </if>
+            <if test="status!=null ">
+                and com.status=#{status}
+            </if>
+            <if test="ownerId!=null ">
+                and com.owner_id=#{ownerId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

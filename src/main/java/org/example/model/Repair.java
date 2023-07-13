@@ -25,12 +25,13 @@ import java.util.Date;
 @ApiModel(value = "Repair对象", description = "")
 
 public class Repair implements Serializable {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
+    @TableId
+    Integer id;
     private Owner owner;
     private RepairType type;
-    @TableId Integer id;
     private String comId;
-    @JsonFormat(locale = "zh",timezone = "GMT+8",pattern = "yyyy-MM-dd")
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date comDate;
     @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date handleDate;

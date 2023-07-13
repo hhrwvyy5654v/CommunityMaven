@@ -21,6 +21,7 @@ import java.util.List;
 public interface RepairMapper extends BaseMapper<Repair> {
     // 查询所有的Repair对象，返回一个Repair对象的List集合
     List<Repair> queryRepairAll(Repair repair);
+
     // 统计Repair表中的数据
     List<Tongji> queryTongji();
 }

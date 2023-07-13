@@ -2,6 +2,7 @@ package org.example.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.example.model.PropertyType;
+
 /**
  * @Project: CommunityMaven
  * @Package: org.example.dao
@@ -13,5 +14,5 @@ import org.example.model.PropertyType;
  */
 
 // 接口继承了BaseMapper接口，继承了BaseMapper的常用方法，例如insert、update、delete、select等方法
-public interface PropertyTypeMapper extends BaseMapper<PropertyType>{
+public interface PropertyTypeMapper extends BaseMapper<PropertyType> {
 }
